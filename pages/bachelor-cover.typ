@@ -103,7 +103,7 @@
   pad(image("../assets/nenu-title.svg", width: 126pt), top: 0cm, bottom: -0.8cm)
 
 
-  text(size: font-size.小一, font: fonts.黑体, weight: "bold")[本科毕业论文]
+  text(size: font-size.小一, font: fonts.黑体, weight: "medium")[本科毕业论文]
 
   v(30pt)
 
