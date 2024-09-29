@@ -1,6 +1,10 @@
+#import "layout/document.typ": doc
 #import "fonts/fonts.typ": font-size, font-family
 #import "pages/bachelor-cover.typ": bachelor-cover
 #import "pages/bachelor-declare.typ": bachelor-declare
+#import "pages/bachelor-abstract.typ": bachelor-abstract
+#import "pages/toc-page.typ": toc
+#import "layout/matter.typ": matter
 
 #let thesis(
   // TODO 新增 "master" 和 "phd" 类型
@@ -15,6 +19,9 @@
   fonts: (:),
   // 额外信息
   info: (:),
+  // 关键词
+  keywords-cn: (),
+  keywords-en: (),
 ) = {
   fonts = font-family + fonts
   info = (
@@ -38,6 +45,18 @@
 
     //TODO 分发更多函数
 
+    doc: (..args) => {
+      doc(
+        ..args,
+        info: info + args.named().at("info", default: (:)),
+        thesis-type: thesis-type
+      )
+    },
+
+    matter: (..args) => {
+      matter(..args)
+    },
+
     cover: (..args) => {
       if thesis-type == "bachelor" {
         bachelor-cover(
@@ -58,10 +77,47 @@
           fonts: fonts + args.named().at("fonts", default: (:)),
           ..args
         )
+        counter(page).update(0)
       } else {
         panic("Not Implemented Yet!")
       }
     },
+
+    abstract-cn: (..args) => {
+      if thesis-type == "bachelor" {
+        bachelor-abstract(
+          two-side: two-side,
+          fonts: fonts + args.named().at("fonts", default: (:)),
+          display-lang: "cn",
+          keywords: keywords-cn,
+          ..args
+        )
+      } else {
+        panic("Not Implemented Yet!")
+      }
+    },
+
+    abstract-en: (..args) => {
+      if thesis-type == "bachelor" {
+        bachelor-abstract(
+          two-side: two-side,
+          fonts: fonts + args.named().at("fonts", default: (:)),
+          display-lang: "en",
+          keywords: keywords-en,
+          ..args
+        )
+      } else {
+        panic("Not Implemented Yet!")
+      }
+    },
+
+    toc: (..args) => {
+      toc(
+        two-side: two-side,
+        fonts: fonts + args.named().at("fonts", default: (:)), 
+        ..args
+      )
+    }
 
   )
 

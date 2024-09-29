@@ -1,7 +1,7 @@
 #import "../fonts/fonts.typ": font-family, font-size
 #import "../utils/color.typ": colorize
 #import "../utils/datetime.typ": datetime-display-cn-cover
-#import "@preview/cuti:0.2.1": cn-fakebold
+#import "../utils/format.typ": fakebold
 
 #let bachelor-cover(
   //! 从 `thesis` 中传入的参数
@@ -75,10 +75,7 @@
 
   pagebreak(weak: true, to: if two-side {"odd"})
 
-  pad(
-    left: 22mm,
-    right: 13mm
-  )[
+  pad[
     #grid(
       columns: (1fr, 1fr),
       column-gutter: 9em,
@@ -110,7 +107,7 @@
   //! 标题
   // TODO 长标题填充
   text(size: font-size.二号, font: fonts.隶书, stroke: .5pt)[
-    #cn-fakebold[#info.title]
+    #fakebold[#info.title]
   ]
 
   v(3pt)
