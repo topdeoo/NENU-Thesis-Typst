@@ -1,6 +1,6 @@
 #import "../fonts/fonts.typ": font-family, font-size
 #import "../utils/color.typ": colorize
-#import "../utils/datetime.typ": datetime-display-cn
+#import "../utils/datetime.typ": datetime-display-cn-cover
 #import "@preview/cuti:0.2.1": cn-fakebold
 
 #let bachelor-cover(
@@ -31,7 +31,7 @@
   ) + info
 
   if type(info.submit-date) == datetime {
-    info.submit-date = datetime-display-cn(info.submit-date)
+    info.submit-date = datetime-display-cn-cover(info.submit-date)
   }
 
   let info-key(body) = {
