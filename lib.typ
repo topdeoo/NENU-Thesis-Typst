@@ -4,7 +4,7 @@
 #import "pages/bachelor-declare.typ": bachelor-declare
 #import "pages/bachelor-abstract.typ": bachelor-abstract
 #import "pages/toc-page.typ": toc
-#import "layout/matter.typ": matter
+#import "layout/mainmatter.typ": mainmatter
 
 #let thesis(
   // TODO 新增 "master" 和 "phd" 类型
@@ -53,8 +53,8 @@
       )
     },
 
-    matter: (..args) => {
-      matter(..args)
+    mainmatter: (..args) => {
+      mainmatter(..args)
     },
 
     cover: (..args) => {
@@ -114,7 +114,7 @@
     toc: (..args) => {
       toc(
         two-side: two-side,
-        fonts: fonts + args.named().at("fonts", default: (:)), 
+        fonts: fonts + args.named().at("fonts", default: (:)),
         ..args
       )
     }

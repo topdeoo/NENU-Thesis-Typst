@@ -31,8 +31,9 @@
   set par(leading: leading, justify: true)
   show par: set block(spacing: spacing)
 
+  // TODO 优化页码索引
   set page(numbering: (..idx) => {
-    text(size: 9pt, numbering("I", idx.pos().first()))
+    text(size: font-size.五号, numbering("I", idx.pos().first()))
   })
 
   if display-lang == "cn" {
@@ -61,12 +62,12 @@
     ]
   } else {
     [
-      #invisible-heading(level: 1, outlined: toc-enable, "ABSTRACT")
+      #invisible-heading(level: 1, outlined: toc-enable, "Abstract")
 
       #align(center)[
         #set text(font: fonts.宋体, weight: "bold", size: font-size.四号)
         #v(1em)
-        ABSTRACT
+        Abstract
         #v(1em)
       ]
 
@@ -80,7 +81,7 @@
 
       #v(1em)
 
-      #fakebold[keywords: ]#(("",) + keywords.intersperse("; ")).sum()
+      #fakebold[Keywords: ]#(("",) + keywords.intersperse("; ")).sum()
     ]
   }
 

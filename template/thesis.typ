@@ -1,6 +1,6 @@
 #import "../lib.typ": thesis
 
-#let (doc, cover, declare, abstract-cn, abstract-en, matter, toc) = thesis(
+#let (doc, cover, declare, abstract-cn, abstract-en, mainmatter, toc) = thesis(
   thesis-type: "bachelor",
   degree: "academic",
   two-side: false,
@@ -42,4 +42,16 @@
 
 #toc()
 
-#show: matter
+#show: mainmatter
+
+= 这是一级标题
+
+#lorem(40)
+
+== 这是二级标题
+
+#lorem(60)
+
+=== 这是三级标题
+
+#lorem(60)

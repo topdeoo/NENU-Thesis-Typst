@@ -81,15 +81,15 @@
     },
   )
 
-  pad[
+  pad(left: 2em)[
     #grid(
       columns: (1fr, 1fr),
       column-gutter: 9em,
-      text(size: font-size.小四, font: fonts.宋体, weight: "medium")[
-        学校代码：10200
+      text(size: font-size.小四, font: fonts.宋体)[
+        #fakebold[学校代码：10200]
       ],
-      text(size: font-size.小四, font: fonts.宋体, weight: "medium")[
-        学号：#info.student-id
+      text(size: font-size.小四, font: fonts.宋体)[
+        #fakebold[学号：#info.student-id]
       ],
     )
   ]
@@ -112,14 +112,14 @@
 
   //! 标题
   // TODO 长标题填充
-  text(size: font-size.二号, font: fonts.隶书, stroke: .5pt)[
+  text(size: font-size.二号, font: fonts.隶书)[
     #fakebold[#info.title]
   ]
 
   v(3pt)
 
-  text(size: font-size.三号, font: fonts.宋体, weight: "medium")[
-    #info.title-en
+  text(size: font-size.三号, font: fonts.宋体)[
+    #fakebold[#info.title-en]
   ]
 
   v(40pt)
