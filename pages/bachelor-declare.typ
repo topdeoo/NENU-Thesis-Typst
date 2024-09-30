@@ -11,8 +11,13 @@
   fonts = font-family + fonts
 
   //! 渲染
-  pagebreak(weak: true, to: if two-side { "odd" })
-  
+  pagebreak(
+    weak: true,
+    to: if two-side {
+      "odd"
+    },
+  )
+
   v(80pt)
 
   //! 标题
@@ -22,18 +27,18 @@
       font: fonts.宋体,
       size: font-size.三号,
       weight: "bold",
-      "独   创   性   声   明\n"
-    )
+      "独   创   性   声   明\n",
+    ),
   )
 
   //! 扉页内容
   block[
-   #set text(font: fonts.宋体, size: font-size.四号, )
-   #set par(justify: true, first-line-indent: 2em, leading: 1.25em)
+    #set text(font: fonts.宋体, size: font-size.四号)
+    #set par(justify: true, first-line-indent: 2em, leading: 1.25em)
 
-   #v(1em)
+    #v(1em)
 
-   #indent 本人郑重声明：所提交的毕业论文是本人在导师指导下独立进行研究工作所取得的成果。据我所知，除了特别加以标注和致谢的地方外，论文中不包含其他人已经发表或撰写过的研究成果。对本人的研究作出重要贡献的个人和集体，均已在文中做了明确的说明。本声明的法律结果由本人承担。 
+    #indent 本人郑重声明：所提交的毕业论文是本人在导师指导下独立进行研究工作所取得的成果。据我所知，除了特别加以标注和致谢的地方外，论文中不包含其他人已经发表或撰写过的研究成果。对本人的研究作出重要贡献的个人和集体，均已在文中做了明确的说明。本声明的法律结果由本人承担。
   ]
 
   //! 签名与日期

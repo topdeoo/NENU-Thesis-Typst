@@ -42,8 +42,8 @@
       text(
         font: fonts.at(info-key-font, default: "宋体"),
         size: font-size.小三,
-        body
-      )
+        body,
+      ),
     )
   }
 
@@ -63,28 +63,34 @@
   }
 
   let info-long-value(key, body) = {
-    grid.cell(colspan: 2,
+    grid.cell(
+      colspan: 2,
       info-value(
         key,
-        body
-      )
+        body,
+      ),
     )
   }
 
   //! 渲染
 
-  pagebreak(weak: true, to: if two-side {"odd"})
+  pagebreak(
+    weak: true,
+    to: if two-side {
+      "odd"
+    },
+  )
 
   pad[
     #grid(
       columns: (1fr, 1fr),
       column-gutter: 9em,
       text(size: font-size.小四, font: fonts.宋体, weight: "medium")[
-          学校代码：10200
+        学校代码：10200
       ],
       text(size: font-size.小四, font: fonts.宋体, weight: "medium")[
-      学号：#info.student-id
-      ]
+        学号：#info.student-id
+      ],
     )
   ]
 
@@ -127,29 +133,24 @@
         columns: (info-key-width, info-key-width, 1fr),
         column-gutter: info-col-gutter,
         row-gutter: info-row-gutter,
-        info-key("学生姓名："),
-        info-long-value("author", info.author),
-        info-key("指导教师："),
-        info-long-value("major", info.major),
-        info-key("所在学院："),
-        info-long-value("department", info.department),
-        info-key("所在专业："),
-        info-long-value("major", info.major)
-      )
-    )
+        info-key("学生姓名："), info-long-value("author", info.author), info-key("指导教师："),
+        info-long-value("major", info.major), info-key("所在学院："), info-long-value("department", info.department),
+        info-key("所在专业："), info-long-value("major", info.major),
+      ),
+    ),
   )
 
   v(100pt)
 
-grid(
-rows: 2, row-gutter: 10pt,
-text(size: font-size.小三, font: fonts.宋体)[
-东北师范大学
-],
-text(size: font-size.小三, font: fonts.宋体)[
-#info.submit-date
-]
-)
+  grid(
+    rows: 2, row-gutter: 10pt,
+    text(size: font-size.小三, font: fonts.宋体)[
+      东北师范大学
+    ],
+    text(size: font-size.小三, font: fonts.宋体)[
+      #info.submit-date
+    ]
+  )
 
 
 }

@@ -15,12 +15,17 @@
   //! 摘要内容
   body
 ) = {
-  
+
   //! 参数处理
   fonts = font-family + fonts
 
   //! 渲染
-  pagebreak(weak: true, to: if two-side { "odd" })
+  pagebreak(
+    weak: true,
+    to: if two-side {
+      "odd"
+    },
+  )
 
   set text(font: fonts.宋体, size: font-size.五号)
   set par(leading: leading, justify: true)
@@ -34,9 +39,7 @@
     [
       #invisible-heading(level: 1, outlined: toc-enable, "摘要")
 
-      #align(
-        center
-      )[
+      #align(center)[
         #set text(font: fonts.宋体, weight: "bold", size: font-size.四号)
         #v(1em)
         摘#h(1em)要
@@ -52,7 +55,7 @@
       ]
 
       #v(1em)
-      
+
 
       #fakebold[关键词：]#(("",) + keywords.intersperse("；")).sum()
     ]
@@ -77,7 +80,7 @@
 
       #v(1em)
 
-      #fakebold[keywords: ]#(("",)+ keywords.intersperse("; ")).sum()
+      #fakebold[keywords: ]#(("",) + keywords.intersperse("; ")).sum()
     ]
   }
 

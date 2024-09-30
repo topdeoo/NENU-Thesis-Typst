@@ -1,6 +1,6 @@
 #let matter(
   ..args,
-  it
+  it,
 ) = {
 
   set heading(numbering: "1")
@@ -9,8 +9,6 @@
     it
   }
 
-  set page(
-    numbering: "1"
-  )
+  set page(numbering: "1")
   it
 }

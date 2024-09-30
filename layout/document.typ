@@ -3,12 +3,12 @@
   thesis-type: "bachelor",
   fallback: false,
   lang: "zh",
-  it
+  it,
 ) = {
   //! 初始化
   info = (
     title: "基于 Typst 的学位论文",
-    author: "张三"
+    author: "张三",
   ) + info
 
   //! 设置样式
@@ -23,7 +23,7 @@
   //! 设置 pdf 信息
   set document(
     title: info.title,
-    author: info.author
+    author: info.author,
   )
 
   it

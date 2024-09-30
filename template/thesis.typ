@@ -1,8 +1,6 @@
 #import "../lib.typ": thesis
 
-#let (
-  doc, cover, declare, abstract-cn, abstract-en, matter, toc
-) = thesis(
+#let (doc, cover, declare, abstract-cn, abstract-en, matter, toc) = thesis(
   thesis-type: "bachelor",
   degree: "academic",
   two-side: false,

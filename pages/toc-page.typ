@@ -41,7 +41,12 @@
   let weight = ("regular", "bold")
 
   // 2.  正式渲染
-  pagebreak(weak: true, to: if two-side { "odd" })
+  pagebreak(
+    weak: true,
+    to: if two-side {
+      "odd"
+    },
+  )
 
   // 默认显示的字体
   set text(font: reference-font, size: reference-size)
@@ -55,7 +60,9 @@
 
   v(title-vspace)
 
-  show outline.entry: outrageous.show-entry.with(
+  show outline.entry: outrageous
+    .show-entry
+    .with(
     // 保留 Typst 基础样式
     ..outrageous.presets.typst,
     body-transform: (level, it) => {
