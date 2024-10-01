@@ -6,6 +6,7 @@
 #import "pages/toc-page.typ": toc
 #import "layout/mainmatter.typ": mainmatter
 #import "@preview/kouhu:0.1.0": kouhu
+#import "pages/reference.typ": nenu-bibliography
 
 #let thesis(
   // TODO 新增 "master" 和 "phd" 类型
@@ -116,6 +117,13 @@
       toc(
         two-side: two-side,
         fonts: fonts + args.named().at("fonts", default: (:)),
+        ..args
+      )
+    },
+
+    nenu-bibliography: (..args) => {
+      nenu-bibliography(
+        bibliography: bibliography,
         ..args
       )
     }

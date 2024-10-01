@@ -1,11 +1,11 @@
 #import "../lib.typ": thesis, kouhu
 #import "@preview/subpar:0.1.1": grid as subfigure
 
-#let (doc, cover, declare, abstract-cn, abstract-en, mainmatter, toc) = thesis(
+#let (doc, cover, declare, abstract-cn, abstract-en, mainmatter, toc, nenu-bibliography) = thesis(
   thesis-type: "bachelor",
   degree: "academic",
   two-side: false,
-  bibliography: none,
+  bibliography: bibliography.with("ref.bib"),
   fonts: (:),
   info: (
     title: ("基于 Typst 的东北师范大学学士学位论文"),
@@ -161,6 +161,15 @@
 
 === 引用
 
+我们通过 `.bib` 文件来创建参考文献，文件名可以任意选择，通过选项：`bibliography: bibliography.with("ref.bib")` 进行导入。
+
+随后，通过 `#cite(<key>)` 进行引用，其中 `key` 是在 `.bib` 中设置的键。
+
+在示例中，我们可以引用 `ref.bib` 文件中的内容，例如《Deep Learning》#cite(<goodfellow2016deep>)，引用2#cite(<丁文祥2000>)
+
+
 == 数学公式
 
+
+#nenu-bibliography(full: true)
 
