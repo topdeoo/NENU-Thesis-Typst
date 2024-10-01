@@ -1,4 +1,5 @@
 #import "../lib.typ": thesis
+#import "@preview/kouhu:0.1.0": kouhu
 
 #let (doc, cover, declare, abstract-cn, abstract-en, mainmatter, toc) = thesis(
   thesis-type: "bachelor",
@@ -46,12 +47,18 @@
 
 = 这是一级标题
 
-#lorem(40)
+#kouhu(builtin-text: "aspirin", length: 100)
 
 == 这是二级标题
 
-#lorem(60)
+#kouhu(builtin-text: "aspirin", offset: 2, length: 300)
 
 === 这是三级标题
 
-#lorem(60)
+#kouhu(builtin-text: "aspirin", offset: 4, length: 300)
+
+#pagebreak()
+
+= 这是第二个一级标题
+
+#kouhu(builtin-text: "aspirin", offset: 6, length: 100)

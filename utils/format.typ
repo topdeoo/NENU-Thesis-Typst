@@ -11,3 +11,12 @@
   set text(size: 0pt, fill: white)
   heading(numbering: none, ..args)
 }
+
+#let unpack(pairs) = {
+  let dict = (:)
+  for (key, value) in pairs {
+    dict[key] = value
+  }
+  dict
+}
+
