@@ -5,6 +5,7 @@
 #import "pages/bachelor-abstract.typ": bachelor-abstract
 #import "pages/toc-page.typ": toc
 #import "layout/mainmatter.typ": mainmatter
+#import "@preview/kouhu:0.1.0": kouhu
 
 #let thesis(
   // TODO 新增 "master" 和 "phd" 类型

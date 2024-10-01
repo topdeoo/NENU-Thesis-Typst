@@ -1,5 +1,5 @@
-#import "../lib.typ": thesis
-#import "@preview/kouhu:0.1.0": kouhu
+#import "../lib.typ": thesis, kouhu
+#import "@preview/subpar:0.1.1": grid as subfigure
 
 #let (doc, cover, declare, abstract-cn, abstract-en, mainmatter, toc) = thesis(
   thesis-type: "bachelor",
@@ -45,20 +45,122 @@
 
 #show: mainmatter
 
-= 这是一级标题
+= 绪 论
 
-#kouhu(builtin-text: "aspirin", length: 100)
+== 列表
 
-== 这是二级标题
+=== 有序列表
 
-#kouhu(builtin-text: "aspirin", offset: 2, length: 300)
++ #kouhu(builtin-text: "aspirin", length: 10)
++ #kouhu(builtin-text: "aspirin", offset: 2, length: 10)
+  + #kouhu(builtin-text: "aspirin", offset: 3, length: 5)
+  + #kouhu(builtin-text: "aspirin", offset: 3, length: 10)
+  + #kouhu(builtin-text: "aspirin", offset: 3, length: 15)
 
-=== 这是三级标题
+=== 无序列表
 
-#kouhu(builtin-text: "aspirin", offset: 4, length: 300)
+- #kouhu(builtin-text: "zhufu", length: 15)
+- #kouhu(builtin-text: "zhufu", offset: 2, length: 15)
+  - #kouhu(builtin-text: "zhufu", offset: 3, length: 15)
+  - #kouhu(builtin-text: "zhufu", offset: 3, length: 15)
+  - #kouhu(builtin-text: "zhufu", offset: 6, length: 15)
+
+=== 术语（`Latex` 中的段落）
+
+/ simp: #kouhu(builtin-text: "simp", length: 15)
+/ 阿司匹林: #kouhu(builtin-text: "aspirin", length: 60)
+
+== 图表
+
+=== 表格
+
+在这里引用表格，例如同一页中的表格：@tbl:usual-table，以及不同页中的表格，例如三线表：@tbl:three-line-table
+
+我们使用 `@tbl:<label>` 来进行表的引用，其中 `<label>` 是跟在表格后的标签，使用尖括号括起来，例如下面的 `usual-table`。
+
+#align(
+  center,
+  (
+    stack(dir: ltr)[
+      #figure(
+        table(
+          align: center + horizon,
+          columns: 4,
+          [x], [1], [2], [3],
+          [y], [5 ms], [6 ms], [0.7 ms],
+        ),
+        caption: [常用表格示例],
+      )<usual-table>
+    ]
+  ),
+)
 
 #pagebreak()
 
-= 这是第二个一级标题
+#align(
+  center,
+  (
+    stack(dir: ltr)[
+      #figure(
+        table(
+          align: center + horizon,
+          columns: 4,
+          stroke: none,
+          table.hline(),
+          [x], [y], [z], [t],
+          table.hline(stroke: .5pt),
+          [11], [5 ms], [3], [0.7],
+          [3000], [80 ms], [1111], [0.9],
+          table.hline()
+        ),
+        caption: [三线表示例],
+      )<three-line-table>
+    ]
+  ),
+)
 
-#kouhu(builtin-text: "aspirin", offset: 6, length: 100)
+=== 图片
+
+我们可以插入图片，也可以修改图片的展示大小，引用图片，例如@fig:ida-star-50, @fig:ida-star-20
+
+#figure(
+  image("fig/ida-star-1.png", width: 50%),
+  caption: [IDA\* 算法示例， 50% 比例缩放],
+)<ida-star-50>
+
+#figure(
+  image("fig/ida-star-1.png", width: 20%),
+  caption: [IDA\* 算法示例， 20% 比例缩放],
+)<ida-star-20>
+
+=== 子图
+
+// FIXME: 子图的标号显示错误，可能与 i-figured & subpar 不兼容有关
+
+// 子图可以使用 #link("https://typst.app/universe/package/subpar")[subpar] 包进行绘制，例如@fig:ida-star-1, @fig:ida-star-2
+
+// #subfigure(
+//   kind: "subfigure",
+//   figure(
+//     image("fig/ida-star-1.png", width: 50%),
+//     caption: [第一步],
+//   ),
+//   <ida-star-1>,
+//   figure(
+//     image("fig/ida-star-2.png", width: 50%),
+//     caption: [第二步],
+//   ),
+//   <ida-star-2>,
+//   columns: (1fr, 1fr),
+//   caption: [子图的使用],
+//   numbering-sub: "a",
+//   label: <ida-star>,
+// )
+
+#highlight(fill: red)[TODO]
+
+=== 引用
+
+== 数学公式
+
+

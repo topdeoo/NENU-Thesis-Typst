@@ -34,10 +34,8 @@
   //! 扉页内容
   block[
     #set text(font: fonts.宋体, size: font-size.四号)
-    #set par(justify: true, first-line-indent: 2em, leading: 1.25em)
-
-    #v(1em)
-
+    #set par(justify: true, first-line-indent: 2em, leading: 1em)
+    #v(.5em)
     #indent 本人郑重声明：所提交的毕业论文是本人在导师指导下独立进行研究工作所取得的成果。据我所知，除了特别加以标注和致谢的地方外，论文中不包含其他人已经发表或撰写过的研究成果。对本人的研究作出重要贡献的个人和集体，均已在文中做了明确的说明。本声明的法律结果由本人承担。
   ]
 
@@ -46,7 +44,7 @@
   set text(font: fonts.宋体, size: font-size.四号)
   [
     #v(2em)
-    论文作者签名：#box(width: 8em, stroke: (bottom: 0.5pt), outset: 2pt)#h(1.5em)日期：#underline(offset: 2pt)[#datetime-display-cn-declare(datetime.today())]
+    #indent 论文作者签名：#box(width: 7em, stroke: (bottom: 0.5pt), outset: 2pt)#h(1em)日期：#underline(offset: 2pt)[#datetime-display-cn-declare(datetime.today())]
   ]
 
 

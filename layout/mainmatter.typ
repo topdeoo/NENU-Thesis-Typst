@@ -3,7 +3,6 @@
 #import "@preview/numbly:0.1.0": numbly
 #import "../utils/format.typ": fake-par, unpack
 
-
 /// 正文部分设置
 #let mainmatter(
   fonts: (:),
@@ -69,6 +68,7 @@
   //! 3. 图片&表格设置
   show heading: i-figured.reset-counters
   show figure: i-figured.show-figure
+
 
   show figure.where(kind: table): set figure.caption(position: top)
   set figure.caption(separator: figure-sep)
