@@ -7,6 +7,7 @@
 #import "layout/mainmatter.typ": mainmatter
 #import "@preview/kouhu:0.1.0": kouhu
 #import "pages/reference.typ": nenu-bibliography
+#import "pages/ackonwledge.typ": acknowledgement
 
 #let thesis(
   // TODO 新增 "master" 和 "phd" 类型
@@ -124,6 +125,13 @@
     nenu-bibliography: (..args) => {
       nenu-bibliography(
         bibliography: bibliography,
+        ..args
+      )
+    },
+
+    acknowledgement: (..args) => {
+      acknowledgement(
+        two-side: two-side,
         ..args
       )
     }

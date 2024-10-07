@@ -1,7 +1,7 @@
 #import "../lib.typ": thesis, kouhu
 #import "@preview/subpar:0.1.1": grid as subfigure
 
-#let (doc, cover, declare, abstract-cn, abstract-en, mainmatter, toc, nenu-bibliography) = thesis(
+#let (doc, cover, declare, abstract-cn, abstract-en, mainmatter, toc, nenu-bibliography, acknowledgement) = thesis(
   thesis-type: "bachelor",
   degree: "academic",
   two-side: false,
@@ -137,27 +137,24 @@
 
 // FIXME: 子图的标号显示错误，可能与 i-figured & subpar 不兼容有关
 
-// 子图可以使用 #link("https://typst.app/universe/package/subpar")[subpar] 包进行绘制，例如@fig:ida-star-1, @fig:ida-star-2
+子图可以使用 #link("https://typst.app/universe/package/subpar")[subpar] 包进行绘制，例如@fig:ida-star-1, @fig:ida-star-2
 
-// #subfigure(
-//   kind: "subfigure",
-//   figure(
-//     image("fig/ida-star-1.png", width: 50%),
-//     caption: [第一步],
-//   ),
-//   <ida-star-1>,
-//   figure(
-//     image("fig/ida-star-2.png", width: 50%),
-//     caption: [第二步],
-//   ),
-//   <ida-star-2>,
-//   columns: (1fr, 1fr),
-//   caption: [子图的使用],
-//   numbering-sub: "a",
-//   label: <ida-star>,
-// )
-
-#highlight(fill: red)[TODO]
+#subfigure(
+  figure(
+    image("fig/ida-star-1.png", width: 50%),
+    caption: [第一步],
+  ),
+  <ida-star-1>,
+  figure(
+    image("fig/ida-star-2.png", width: 50%),
+    caption: [第二步],
+  ),
+  <ida-star-2>,
+  columns: (1fr, 1fr),
+  caption: [子图的使用],
+  numbering-sub: "a",
+  label: <ida-star>,
+)
 
 === 引用
 
@@ -173,3 +170,8 @@
 
 #nenu-bibliography(full: true)
 
+
+
+#acknowledgement[
+  #kouhu(length: 100)
+]
