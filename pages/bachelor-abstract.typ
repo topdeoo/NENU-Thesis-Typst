@@ -28,8 +28,7 @@
   )
 
   set text(font: fonts.宋体, size: font-size.五号)
-  set par(leading: leading, justify: true)
-  show par: set block(spacing: spacing)
+  set par(leading: leading, justify: true, spacing: spacing)
 
   // TODO 优化页码索引
   set page(numbering: (..idx) => {
