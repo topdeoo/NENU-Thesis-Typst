@@ -1,3 +1,6 @@
+/// This template is written by [@zengls](https://github.com/zengls3186428803)
+/// Improved by [@virgil](https://github.com/topdeoo)
+
 #import "@preview/numbly:0.1.0": numbly
 #import "@preview/cuti:0.2.1": fakebold
 
