@@ -46,9 +46,21 @@
 // 选项栏
 #let checkbox(checked: false) = {
   if checked {
-    $checkmark$
+    box(
+      stroke: .05em,
+      height: .8em,
+      width: .8em,
+      {
+        box(move(dy: .48em, dx: 0.1em, rotate(45deg, reflow: false, line(length: 0.3em, stroke: .1em))))
+        box(move(dy: .38em, dx: -0.05em, rotate(-45deg, reflow: false, line(length: 0.48em, stroke: .1em))))
+      },
+    )
   } else {
-    $square.stroked$
+    box(
+      stroke: .05em,
+      height: .8em,
+      width: .8em,
+    )
   }
 }
 
@@ -68,7 +80,7 @@
   set align(center)
   set text(size: font-size.二号, font: font-family.黑体)
   v(4em)
-  fakebold[#title.school \ #title.type]
+  fakebold[#title.school #v(.5em) #title.type]
 
   set text(size: font-size.三号, font: font-family.楷体)
   v(3.5em)
@@ -123,9 +135,9 @@
     2.参考文献是指在开题报告中实际引用的文献。博士生实际引用文献须不少于 50 篇，硕士生实际引用文献须不少于 30 篇。参考文献格式参照学位论文格式要求，建议文中引用文献以脚注形式标注，并在文末按照字母顺序列出所有引用文献。
 
     3.博士生论文开题时间与学位论文通讯评阅时间间隔原则上不少于 1.5 年，硕士生论文开题时间与学位论文通讯评阅时间间隔原则上不少于 8 个月。
-    开题报告审查小组根据开题报告情况，在相应的 $square$ 内打号。合格的开题报告，由学院存档并作为毕业审核材料之一。
+    开题报告审查小组根据开题报告情况，在相应的 #checkbox() 内打号。合格的开题报告，由学院存档并作为毕业审核材料之一。
 
-    4.开题报告审查小组根据开题报告情况，在相应的 $square$ 内打 $checkmark.light$ 号。合格的开题报告，由学院存档并作为毕业审核材料之一。
+    4.开题报告审查小组根据开题报告情况，在相应的 #checkbox() 内打 $checkmark.light$ 号。合格的开题报告，由学院存档并作为毕业审核材料之一。
 
     5.开题报告中的字体字号均用宋体小四，页边距上下20MM,左右25MM，用A4纸打印，于左侧装订成册。
 
@@ -199,6 +211,7 @@
   )
 }
 
+// [!FIXME] 增加 dx, dy 偏移量参数，使得签名能够放在恰当的位置上
 #let sign(sign_image, date: datetime) = {
   place(right + bottom)[
     指导教师签字：#box(
