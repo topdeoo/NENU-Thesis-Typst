@@ -168,6 +168,13 @@
 == 数学公式
 
 
+@eqt:nabla 这是行间公式
+
+$
+  nabla L = partial L / partial x
+$<nabla>
+
+
 #nenu-bibliography(full: true)
 
 

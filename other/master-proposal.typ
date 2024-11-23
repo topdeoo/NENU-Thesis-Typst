@@ -3,6 +3,10 @@
 
 #import "@preview/numbly:0.1.0": numbly
 #import "@preview/cuti:0.2.1": fakebold
+#import "@preview/fletcher:0.5.1" as fletcher: node, edge
+#import "@preview/i-figured:0.2.4"
+#import "@preview/lovelace:0.3.0": *
+#import "@preview/cetz:0.3.1"
 
 #let font-size = (
   初号: 42pt,
@@ -152,8 +156,8 @@
 
 #let doc(it) = {
   set page(margin: (top: 2cm, bottom: 2cm, left: 2.5cm, right: 2.5cm))
-  set text(size: font-size.四号, font: font-family.宋体)
-  set par(leading: 1em, first-line-indent: 2em)
+  set text(size: font-size.小四, font: font-family.宋体, lang: "zh")
+  set par(leading: 1em, first-line-indent: 2em, justify: true)
   set heading(
     numbering: numbly(
       "{1:一}、",
@@ -172,7 +176,7 @@
     v(0.5em)
     [
       #fake-par
-      #set par(leading: 1em, first-line-indent: 2em)
+      #set par(leading: 1em, first-line-indent: 0em)
       #if it.level == 1 {
         text(font: font-family.黑体, size: font-size.三号)[
           #fakebold[#counter(heading).display() #title]
@@ -189,6 +193,24 @@
       }
     ]
   }
+
+
+  //! 3. 图片&表格设置
+  show heading: i-figured.reset-counters
+  show figure: i-figured.show-figure
+
+
+  show figure.where(kind: table): set figure.caption(position: top)
+  set figure.caption(separator: " ")
+  show figure.caption: fakebold
+  show figure.caption: set text(font: font-family.宋体, size: font-size.五号)
+
+  //! 4. 公式编号
+  show math.equation.where(block: true): i-figured.show-equation
+
+  show terms: set par(first-line-indent: 0pt)
+
+
   it
 }
 
@@ -202,7 +224,7 @@
   ]
   assert(bibliography != none, message: "bibliography 函数不能为空")
 
-  set text(lang: "zh", size: font-size.四号, font: font-family.宋体)
+  set text(lang: "zh", size: font-size.小四, font: font-family.宋体)
 
   bibliography(
     title: none,
@@ -212,9 +234,9 @@
 }
 
 // [!FIXME] 增加 dx, dy 偏移量参数，使得签名能够放在恰当的位置上
-#let sign(sign_image, date: datetime) = {
+#let sign(sign_image: none, date: datetime) = {
   place(right + bottom)[
-    指导教师签字：#box(
+    指导教师签字：#h(5em) #box(
       sign_image, height: 1.15em
     ) \
     #datetime-display-cn-declare(date)
@@ -222,7 +244,7 @@
   ]
 }
 
-#let review_conclusion(teachers, sign_image, date: datetime) = {
+#let review_conclusion(teachers, sign_image: none, date: datetime) = {
   let teacher_table_rows = ()
   for teacher in teachers {
     teacher_table_rows += (teacher.name, teacher.title, teacher.workplace)
@@ -295,10 +317,6 @@
       ]
     ]
   ]
-
-
-
-
 }
 
 
@@ -327,58 +345,30 @@
 //! Start writing here
 
 = 研究背景（分析本选题范畴内尚未得到较好解决的学术或实践难题，阐述选题的缘起与依据）
-#lorem(100)
 
-分析本选题范畴内尚未得到较好解决的学术或实践难题，
-分析本选题范畴内尚未得到较好解决的学术或实践难题，
-分析本选题范畴内尚未得到较好解决的学术或实践难题，
-分析本选题范畴内尚未得到较好解决的学术或实践难题，
-
+#pagebreak()
 = 文献综述（系统梳理本选题相关的具有代表性的文献，分析相关研究的发展脉络与进展，评述已有研究存在的问题与不足）
 
-== Transformer 的表达能力与通用近似能力
-
-== Transformer 的泛化能力
-
-=== 泛化理论
-
-#lorem(100)
-
-分析本选题范畴内尚未得到较好解决的学术或实践难题，
-分析本选题范畴内尚未得到较好解决的学术或实践难题，
-分析本选题范畴内尚未得到较好解决的学术或实践难题，
-分析本选题范畴内尚未得到较好解决的学术或实践难题，
-
-=== 大模型的泛化现象
-
-
-== Transformer的训练
-
+#pagebreak()
 = 研究问题（提出本论文拟回答的核心问题及具体研究问题）
 
+#pagebreak()
 = 研究意义（阐述本研究可能的理论贡献与实践价值）
 
-这里是引用@neyshabur2017pac @krogh1991simple @dong2022survey @kalyan2021ammus @zhang2023adalora @pmlr-v48-hardt16，单个引用@kalyan2021ammus
-
+#pagebreak()
 = 研究设计（针对研究问题，详细阐述本选题的研究内容、基本思路或总体框架、理论基础、具体研究方案等）
 
+
+#pagebreak()
 = 进度安排（按照时间顺序，就研究的进度做出具体的规划）
 
-2024年11月-2025年1月：代码编写，实验验证
-
-2025年2月-2025年3月：证明D-TF的token-coherence与收敛和泛化的关系
-
-2025年4月-2025年5月：撰写论文
-
-2025年6月：论文修改，准备答辩
-
-
+#pagebreak()
 #nenu-bibliography(bibliography: bibliography.with("references.bib"))
 
 
 //! 在这里填入自己的签名文件路径
 #sign(
-  image("sign.svg", height: 3em),
+  // image("sign.svg", height: 2em),
   date: datetime.today(),
 )
 
@@ -412,6 +402,6 @@
       workplace: "浙江大学",
     ),
   ),
-  image("sign.svg", height: 4em),
+  // image("sign.svg", height: 2em),
   date: datetime.today(),
 )
