@@ -99,7 +99,7 @@
       distr("论文题目", w: 7em), [：#author_info.title],
       distr("报告人姓名", w: 7em), [：#author_info.name],
       distr("研究方向", w: 7em), [：#author_info.direction],
-      distr("学历层次", w: 7em), [：#author_info.major],
+      distr("学科专业", w: 7em), [：#author_info.major],
       distr("年级", w: 7em), [：#author_info.grade],
       distr("学历层次", w: 7em),
       [：博士生 #checkbox(checked: author_info.level == "博士生")
