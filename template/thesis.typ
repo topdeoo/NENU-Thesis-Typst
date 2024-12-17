@@ -8,8 +8,8 @@
   bibliography: bibliography.with("ref.bib"),
   fonts: (:),
   info: (
-    title: ("基于 Typst 的东北师范大学学士学位论文"),
-    title-en: ("My Thesis in English"),
+    title: "基于 Typst 的东北师范大学学士学位论文",
+    title-en: "My Thesis in English",
     student-id: "2024123456",
     author: "张三",
     department: "信息科学与技术学院",
@@ -139,19 +139,42 @@
 
 子图可以使用 #link("https://typst.app/universe/package/subpar")[subpar] 包进行绘制，例如@fig:ida-star-1, @fig:ida-star-2
 
+// #subfigure(
+//   figure(
+//     image("fig/ida-star-1.png", width: 50%),
+//     caption: [第一步],
+//   ),
+//   <ida-star-1>,
+//   figure(
+//     image("fig/ida-star-2.png", width: 50%),
+//     caption: [第二步],
+//   ),
+//   <ida-star-2>,
+//   columns: (1fr, 1fr),
+//   caption: [子图的使用],
+//   numbering-sub: "a",
+//   label: <ida-star>,
+// )
+
+
+#pagebreak()
+=== Sub-Figure
+
+We can use package `subpar` to draw sub-figures, which can be referenced as @fig:ida-star, and sub-figures @fig:ida-star-1, @fig:ida-star-2
+
 #subfigure(
   figure(
     image("fig/ida-star-1.png", width: 50%),
-    caption: [第一步],
+    caption: [first step],
   ),
   <ida-star-1>,
   figure(
     image("fig/ida-star-2.png", width: 50%),
-    caption: [第二步],
+    caption: [second step],
   ),
   <ida-star-2>,
   columns: (1fr, 1fr),
-  caption: [子图的使用],
+  caption: [usage of package `subpar`],
   numbering-sub: "a",
   label: <ida-star>,
 )
