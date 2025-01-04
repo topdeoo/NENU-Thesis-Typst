@@ -1,7 +1,21 @@
-#import "../lib.typ": thesis, kouhu
-#import "@preview/subpar:0.1.1": grid as subfigure
+#import "../lib.typ": thesis, kouhu, codly, codly-init, codly-languages, no-codly
 
-#let (doc, cover, declare, abstract-cn, abstract-en, mainmatter, toc, nenu-bibliography, acknowledgement) = thesis(
+
+#show: codly-init.with()
+#codly(languages: codly-languages)
+
+#let (
+  doc,
+  cover,
+  declare,
+  abstract-cn,
+  abstract-en,
+  mainmatter,
+  fence,
+  toc,
+  nenu-bibliography,
+  acknowledgement,
+) = thesis(
   thesis-type: "bachelor",
   degree: "academic",
   two-side: false,
@@ -70,13 +84,46 @@
 / simp: #kouhu(builtin-text: "simp", length: 15)
 / 阿司匹林: #kouhu(builtin-text: "aspirin", length: 60)
 
+== 代码
+
+行内代码我们使用 \`\` 将其括起来，这与 `Markdown` 中的语法一致
+
+行间代码， 也就是代码块，其语法与 `Markdown` 中一致，例如：
+
+#raw("
+```typ
+  #let a = 1
+```
+")
+
+其表现为，此时发现代码块的表现很差，且无法引用
+
+#no-codly[
+  ```typ
+  #let a = 1
+  ```
+]
+
+因此，这里我们使用包 `codly` 来美化代码块，并将其放入到下文的图表中，进行引用，`@lst:<key>` 来引用代码块，例如下面的代码，我们使用语句 `@lst:fib-fn-py` 来引用，即@lst:fib-fn-py
+
+#figure(caption: "Python 实现的斐波那契函数")[
+  ```py
+  def fib(n):
+    if n <= 1:
+      return n
+    return fib(n - 1) + fib(n - 2)
+  ```
+]<fib-fn-py>
+
+关于 `codly` 的更多用法请阅读#link("https://typst.app/universe/package/codly")[参考文档]
+
 == 图表
 
 === 表格
 
 在这里引用表格，例如同一页中的表格：@tbl:usual-table，以及不同页中的表格，例如三线表：@tbl:three-line-table
 
-我们使用 `@tbl:<label>` 来进行表的引用，其中 `<label>` 是跟在表格后的标签，使用尖括号括起来，例如下面的 `usual-table`。
+我们使用 `@tbl:<label>` 来进行表的引用，其中 `<label>` 是跟在表格后的标签，使用尖括号括起来，例如下面的@tbl:usual-table，我们使用命令 `@tbl:usual-table` 即可引用。
 
 #align(
   center,
@@ -94,8 +141,6 @@
     ]
   ),
 )
-
-#pagebreak()
 
 #align(
   center,
@@ -123,6 +168,10 @@
 
 我们可以插入图片，也可以修改图片的展示大小，引用图片，例如@fig:ida-star-50, @fig:ida-star-20
 
+我们通过函数 `#figure` 来表示一个图片，在其中通过 `image` 函数来导入一张图片，格式可以是 `png`, `svg` `jpg` 等常见格式，可以通过 `width` 等参数来调整图片的大小和位置。例如，`width: 50%` 表示图片宽度为页面宽度的 50%，`height: auto` 表示高度自适应，`align: center` 表示图片居中显示。
+
+我们使用 `@fig:<label>` 来进行表的引用，其中 `<label>` 是跟在图片后的标签，使用尖括号括起来，例如下面的@fig:ida-star-20，我们使用命令 `@fig:ida-star-20` 即可引用。
+
 #figure(
   image("fig/ida-star-1.png", width: 50%),
   caption: [IDA\* 算法示例， 50% 比例缩放],
@@ -135,72 +184,85 @@
 
 === 子图
 
-// FIXME: 子图的标号显示错误，可能与 i-figured & subpar 不兼容有关
-
-子图可以使用 #link("https://typst.app/universe/package/subpar")[subpar] 包进行绘制，例如@fig:ida-star-1, @fig:ida-star-2
-
-// #subfigure(
-//   figure(
-//     image("fig/ida-star-1.png", width: 50%),
-//     caption: [第一步],
-//   ),
-//   <ida-star-1>,
-//   figure(
-//     image("fig/ida-star-2.png", width: 50%),
-//     caption: [第二步],
-//   ),
-//   <ida-star-2>,
-//   columns: (1fr, 1fr),
-//   caption: [子图的使用],
-//   numbering-sub: "a",
-//   label: <ida-star>,
-// )
-
-
-#pagebreak()
-=== Sub-Figure
-
-We can use package `subpar` to draw sub-figures, which can be referenced as @fig:ida-star, and sub-figures @fig:ida-star-1, @fig:ida-star-2
-
-#subfigure(
-  figure(
-    image("fig/ida-star-1.png", width: 50%),
-    caption: [first step],
-  ),
-  <ida-star-1>,
-  figure(
-    image("fig/ida-star-2.png", width: 50%),
-    caption: [second step],
-  ),
-  <ida-star-2>,
-  columns: (1fr, 1fr),
-  caption: [usage of package `subpar`],
-  numbering-sub: "a",
-  label: <ida-star>,
-)
-
-=== 引用
-
-我们通过 `.bib` 文件来创建参考文献，文件名可以任意选择，通过选项：`bibliography: bibliography.with("ref.bib")` 进行导入。
-
-随后，通过 `#cite(<key>)` 进行引用，其中 `key` 是在 `.bib` 中设置的键。
-
-在示例中，我们可以引用 `ref.bib` 文件中的内容，例如《Deep Learning》#cite(<goodfellow2016deep>)，引用2#cite(<丁文祥2000>)
-
+暂时无法实现子图，可以使用 #link("https://app.diagrams.net/")[Draw.io] 等网站绘制完子图，然后导出一个大图，贴到论文中。
 
 == 数学公式
 
+数学公式分为行内公式与行间公式，其中，行内公式不会出现编号和引用，行间公式可以会在最右侧显示编号，并且可以引用。
 
-@eqt:nabla 这是行间公式
+例如，这是一个简单的行内公式 $sum_(i=1)^n a_i$，这是一个复杂的行内公式：$U(H, t, p) = product^p_(j=1)product_k e^((-i H_k t)/n), H = sum_k H_k$
+
+
+下面是一个行间公式，我们可以通过将其编号为 `<nabla>`，然后通过 `@eqt:nabla` 来引用，例如@eqt:nabla
 
 $
   nabla L = partial L / partial x
 $<nabla>
 
+@eqt:sgd-demo 是一个复杂的行间公式，这里我们使用 `&` 作为锚点进行对齐，这与 `Latex` 中是一致的，区别是我们不需要写 `\begin{aligned}` 与 `\end{aligned}`
+$
+  (w^((i+1)), b^((i+1))) &= (w^((i)), b^((i))) - alpha nabla "Loss"(w^((i)), b^((i))) \
+  &= (w^((i)), b^((i))) - alpha ((partial "Loss")(partial w), (partial "Loss")(partial b))\
+  &= (w^((i)), b^((i))) - alpha ( 1 / N sum^N_(j=1)x_j(b^((i)) + w^((i)T)x_j - y_j), \
+    &&1 / N sum^N_(j=1)(b^((i))+w^((i)T)x_j - y_j) )
+$<sgd-demo>
+
+== 参考文献的引用
+
+我们通过 `.bib` 文件来导入参考文献，文件名可以任意选择，通过选项：`bibliography: bibliography.with("ref.bib")` 进行导入，这里我们只需要将 网站上赋值的 `biblatex` 引用赋值粘贴到 `ref.bib` 中即可。
+
+随后，通过 `#cite(<key>)` 进行引用，其中 `key` 是在 `.bib` 中设置的键。
+
+在示例中，我们可以引用 `ref.bib` 文件中的内容，例如《Deep Learning》#cite(<goodfellow2016deep>)，引用2#cite(<丁文祥2000>)
+
+当然，我们也可以通过简单的方式，`@key` 的语法糖即可引用，例如上述的《Deep Learning》@goodfellow2016deep，引用2@丁文祥2000
+
+在 `ref.bib` 中，如@lst:ref-demo 所示，引用的部分条目为：
+
+#figure(caption: "参考文献bib文件部分示例")[
+  ```bib
+  @article{丁文祥2000,
+    title={数字革命与竞争国际化},
+    author={丁文祥},
+    journal={中国青年报},
+    year={2000},
+    month={11-20},
+    number={15}
+  }
+
+  @book{goodfellow2016deep,
+    title = {Deep learning},
+    author = {Goodfellow, Ian and Bengio, Yoshua and Courville, Aaron and Bengio, Yoshua},
+    volume = {1},
+    year = {2016},
+    publisher = {MIT Press}
+  }
+  ```
+]<ref-demo>
+
+第一行的内容即为引用所需的 `key`。
+
+= 正文
+
+== 正文子标题
+
+=== 正文子子标题
+
+正文内容
+
+*需要注意，标题只支持到三级标题，不支持四级标题*，如果需要四级标题，请使用术语，也就是：
+
+\ 术语（term）
+
+
+使用 `#pagebreak()` 手动分页
+#pagebreak()
+
+= 更多正文
+
+#fence()
 
 #nenu-bibliography(full: true)
-
-
 
 #acknowledgement[
   #kouhu(length: 100)
