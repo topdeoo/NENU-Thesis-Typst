@@ -5,9 +5,12 @@
 #import "pages/bachelor-abstract.typ": bachelor-abstract
 #import "pages/toc-page.typ": toc
 #import "layout/mainmatter.typ": mainmatter
-#import "@preview/kouhu:0.1.0": kouhu
 #import "pages/reference.typ": nenu-bibliography
 #import "pages/ackonwledge.typ": acknowledgement
+#import "@preview/anti-matter:0.1.1": fence
+#import "@preview/kouhu:0.1.0": kouhu
+#import "@preview/codly:1.1.1": *
+#import "@preview/codly-languages:0.1.1": *
 
 #let thesis(
   // TODO 新增 "master" 和 "phd" 类型
@@ -28,15 +31,18 @@
 ) = {
   fonts = font-family + fonts
   info = (
-    title: ("毕业论文中文题目"),
-    title-en: ("毕业论文英文题目"),
-    student-id: "123456",
-    author: "张三",
-    department: "信息科学与技术学院",
-    major: "计算机科学与技术",
-    supervisor: "李四",
-    submit-date: datetime.today(),
-  ) + info
+    (
+      title: "毕业论文中文题目",
+      title-en: "毕业论文英文题目",
+      student-id: "123456",
+      author: "张三",
+      department: "信息科学与技术学院",
+      major: "计算机科学与技术",
+      supervisor: "李四",
+      submit-date: datetime.today(),
+    )
+      + info
+  )
 
   (
     thesis-type: thesis-type,
@@ -44,48 +50,44 @@
     two-side: two-side,
     fonts: fonts,
     info: info,
-
-
     //TODO 分发更多函数
-
     doc: (..args) => {
       doc(
         ..args,
         info: info + args.named().at("info", default: (:)),
-        thesis-type: thesis-type
+        thesis-type: thesis-type,
       )
     },
-
     mainmatter: (..args) => {
       mainmatter(..args)
     },
-
+    fence: (..args) => {
+      fence(..args)
+    },
     cover: (..args) => {
       if thesis-type == "bachelor" {
         bachelor-cover(
           two-side: two-side,
           fonts: fonts + args.named().at("fonts", default: (:)),
           info: info + args.named().at("info", default: (:)),
-          ..args
+          ..args,
         )
       } else {
         panic("Not Implemented Yet!")
       }
     },
-
     declare: (..args) => {
       if thesis-type == "bachelor" {
         bachelor-declare(
           two-side: two-side,
           fonts: fonts + args.named().at("fonts", default: (:)),
-          ..args
+          ..args,
         )
         counter(page).update(0)
       } else {
         panic("Not Implemented Yet!")
       }
     },
-
     abstract-cn: (..args) => {
       if thesis-type == "bachelor" {
         bachelor-abstract(
@@ -93,13 +95,12 @@
           fonts: fonts + args.named().at("fonts", default: (:)),
           display-lang: "cn",
           keywords: keywords-cn,
-          ..args
+          ..args,
         )
       } else {
         panic("Not Implemented Yet!")
       }
     },
-
     abstract-en: (..args) => {
       if thesis-type == "bachelor" {
         bachelor-abstract(
@@ -107,35 +108,30 @@
           fonts: fonts + args.named().at("fonts", default: (:)),
           display-lang: "en",
           keywords: keywords-en,
-          ..args
+          ..args,
         )
       } else {
         panic("Not Implemented Yet!")
       }
     },
-
     toc: (..args) => {
       toc(
         two-side: two-side,
         fonts: fonts + args.named().at("fonts", default: (:)),
-        ..args
+        ..args,
       )
     },
-
     nenu-bibliography: (..args) => {
       nenu-bibliography(
         bibliography: bibliography,
-        ..args
+        ..args,
       )
     },
-
     acknowledgement: (..args) => {
       acknowledgement(
         two-side: two-side,
-        ..args
+        ..args,
       )
-    }
-
+    },
   )
-
 }

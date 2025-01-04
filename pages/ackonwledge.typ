@@ -1,3 +1,4 @@
+
 //! 致谢页
 #let acknowledgement(
   two-side: false,
@@ -12,9 +13,13 @@
       "odd"
     },
   )
+
+  set page(..(
+    numbering: (..idx) => { },
+  ))
+
   [
     #heading(level: 1, numbering: none, outlined: outlined, title) <no-auto-pagebreak>
     #body
   ]
-
 }

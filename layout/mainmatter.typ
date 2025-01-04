@@ -1,7 +1,7 @@
 #import "../fonts/fonts.typ": font-family, font-size
 #import "@preview/i-figured:0.2.4"
 #import "@preview/numbly:0.1.0": numbly
-#import "../utils/format.typ": fake-par, unpack
+#import "../utils/format.typ": fake-par, unpack, fakebold, fakeitalic
 
 /// 正文部分设置
 #let mainmatter(
@@ -13,13 +13,13 @@
   heading-size: (font-size.四号, font-size.小四, font-size.五号),
   heading-pagebreak: (true, false),
   heading-align: (center, auto),
-  heading-padding: (top: 2*15.6pt - .7em, bottom: (2*15.6pt - .7em, 1.5*15.6pt - .7em)),
+  heading-padding: (top: 2 * 15.6pt - .7em, bottom: (2 * 15.6pt - .7em, 1.5 * 15.6pt - .7em)),
   //! 页眉配置
   header-title: ("东北师范大学学士学位论文",),
   header-vspace: 0em,
   //! 段落配置
-  leading: 1.25 * font-size.五号 - 0.7em,
-  spacing: 1.25 * font-size.五号 - 0.7em,
+  leading: 1.25 * font-size.五号,
+  spacing: 1.25 * font-size.五号,
   justify: true,
   first-line-indent: 2em,
   figure-sep: " ",
@@ -27,7 +27,6 @@
   ..args,
   it,
 ) = {
-
   //! 设置字体与字号
   fonts = font-family + fonts
 
@@ -39,10 +38,14 @@
     heading-font = (fonts.宋体,)
   }
 
-  let heading-text-args-lists = args.named().pairs().filter(pair => pair.at(0).starts-with("heading-")).map(pair => (
-    pair.at(0).slice("heading-".len()),
-    pair.at(1),
-  ))
+  let heading-text-args-lists = args
+    .named()
+    .pairs()
+    .filter(pair => pair.at(0).starts-with("heading-"))
+    .map(pair => (
+      pair.at(0).slice("heading-".len()),
+      pair.at(1),
+    ))
 
 
   let array-at(arr, pos) = {
@@ -57,10 +60,12 @@
     leading: leading,
     justify: justify,
     first-line-indent: first-line-indent,
+    spacing: spacing,
   )
 
-  show par: set block(spacing: spacing)
   show raw: set text(font: fonts.等宽)
+  show strong: fakebold
+  show emph: fakeitalic
 
   //! 2. 脚注
   show footnote.entry: set text(font: fonts.宋体, size: font-size.五号)
@@ -74,6 +79,7 @@
   set figure.caption(separator: figure-sep)
   show figure.caption: figure-caption-style
   show figure.caption: set text(..text-args)
+  show figure.caption: set par(spacing: spacing + .5em)
 
   //! 4. 公式编号
   show math.equation.where(block: true): i-figured.show-equation
@@ -128,18 +134,16 @@
   set page(..(
     header: {
       counter(footnote).update(0)
-      locate(loc => {
-        // TODO 增加硕士/博士学位论文支持
-        set text(font: fonts.宋体, size: font-size.五号)
-        set align(center)
-        stack(
+      context [
+        #set text(font: fonts.宋体, size: font-size.五号)
+        #set align(center)
+        #stack(
           header-title.at(0),
           v(.3em),
           line(length: 100%),
         )
-        v(header-vspace)
-
-      })
+        #v(header-vspace)
+      ]
     },
     numbering: (..idx) => {
       text(size: font-size.五号, numbering("1", idx.pos().first()))
