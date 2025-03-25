@@ -40,8 +40,7 @@
       major: "计算机科学与技术",
       supervisor: "李四",
       submit-date: datetime.today(),
-    )
-      + info
+    ) + info
   )
 
   (

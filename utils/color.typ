@@ -1,11 +1,12 @@
+//! This Snippet is used to colorize the svg image.
+//! Thanks to Beiri22(https://github.com/Beiri22) provided the original version in issue#1939(https://github.com/typst/typst/issues/1939)
+
 #let colorize(svg, color) = {
   let blk = black.to-hex()
-  // You might improve this prototypical detection.
   if svg.contains(blk) {
-    // Just replace
-    svg.replace(blk, color.to-hex())
+    svg = svg.replace(blk, color.to-hex())
   } else {
-    // Explicitly state color
-    svg.replace("<svg ", "<svg fill=\"" + color.to-hex() + "\" ")
+    svg = svg.replace("<svg ", "<svg fill=\"" + color.to-hex() + "\" ")
   }
+  bytes(svg)
 }

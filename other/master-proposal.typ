@@ -55,8 +55,20 @@
       height: .8em,
       width: .8em,
       {
-        box(move(dy: .48em, dx: 0.1em, rotate(45deg, reflow: false, line(length: 0.3em, stroke: .1em))))
-        box(move(dy: .38em, dx: -0.05em, rotate(-45deg, reflow: false, line(length: 0.48em, stroke: .1em))))
+        box(
+          move(
+            dy: .48em,
+            dx: 0.1em,
+            rotate(45deg, reflow: false, line(length: 0.3em, stroke: .1em)),
+          ),
+        )
+        box(
+          move(
+            dy: .38em,
+            dx: -0.05em,
+            rotate(-45deg, reflow: false, line(length: 0.48em, stroke: .1em)),
+          ),
+        )
       },
     )
   } else {
@@ -73,7 +85,10 @@
 }
 
 #let distr(s, w: auto) = {
-  block(width: w, stack(dir: ltr, ..s.clusters().map(x => [#x]).intersperse(1fr)))
+  block(
+    width: w,
+    stack(dir: ltr, ..s.clusters().map(x => [#x]).intersperse(1fr)),
+  )
 }
 
 #let cover(
@@ -296,8 +311,11 @@
         inset: 10pt,
         stroke: none,
         align: left,
-        [合格，修改后可以进入学位论文写作阶段], [#box(width: 10pt, height: 10pt, stroke: 0.5pt)],
-        [ 不合格，需再次进行学位论文开题报告], [#box(width: 10pt, height: 10pt, stroke: 0.5pt)],
+        [合格，修改后可以进入学位论文写作阶段],
+        [#box(width: 10pt, height: 10pt, stroke: 0.5pt)],
+
+        [ 不合格，需再次进行学位论文开题报告],
+        [#box(width: 10pt, height: 10pt, stroke: 0.5pt)],
       )
 
       #v(15em)

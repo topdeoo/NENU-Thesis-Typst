@@ -201,10 +201,16 @@ $<nabla>
 
 @eqt:sgd-demo 是一个复杂的行间公式，这里我们使用 `&` 作为锚点进行对齐，这与 `Latex` 中是一致的，区别是我们不需要写 `\begin{aligned}` 与 `\end{aligned}`
 $
-  (w^((i+1)), b^((i+1))) &= (w^((i)), b^((i))) - alpha nabla "Loss"(w^((i)), b^((i))) \
-  &= (w^((i)), b^((i))) - alpha ((partial "Loss")(partial w), (partial "Loss")(partial b))\
-  &= (w^((i)), b^((i))) - alpha ( 1 / N sum^N_(j=1)x_j(b^((i)) + w^((i)T)x_j - y_j), \
-    &&1 / N sum^N_(j=1)(b^((i))+w^((i)T)x_j - y_j) )
+  (w^((i+1)), b^((i+1))) &= (w^((i)), b^((i))) - alpha nabla "Loss"(
+    w^((i)), b^((i))
+  ) \
+  &= (w^((i)), b^((i))) - alpha (
+    (partial "Loss")(partial w), (partial "Loss")(partial b)
+  )\
+  &= (w^((i)), b^((i))) - alpha (
+    1 / N sum^N_(j=1)x_j(b^((i)) + w^((i)T)x_j - y_j), \
+    &&1 / N sum^N_(j=1)(b^((i))+w^((i)T)x_j - y_j)
+  )
 $<sgd-demo>
 
 == 参考文献的引用

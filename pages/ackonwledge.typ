@@ -19,7 +19,12 @@
   ))
 
   [
-    #heading(level: 1, numbering: none, outlined: outlined, title) <no-auto-pagebreak>
+    #heading(
+      level: 1,
+      numbering: none,
+      outlined: outlined,
+      title,
+    ) <no-auto-pagebreak>
     #body
   ]
 }

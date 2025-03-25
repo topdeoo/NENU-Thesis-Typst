@@ -1,7 +1,6 @@
 #import "../fonts/fonts.typ": font-family, font-size
 #import "../utils/color.typ": colorize
 #import "../utils/datetime.typ": datetime-display-cn-cover
-#import "../utils/format.typ": fakebold
 
 #let bachelor-cover(
   //! 从 `thesis` 中传入的参数
@@ -15,20 +14,21 @@
   info-key-font: "宋体",
   info-value-font: "宋体",
   info-col-gutter: -3pt,
-  info-row-gutter: 5pt
-
+  info-row-gutter: 5pt,
 ) = {
   fonts = font-family + fonts
   info = (
-    title: ("毕业论文中文题目"),
-    title-en: ("毕业论文英文题目"),
-    student-id: "123456",
-    author: "张三",
-    department: "信息科学与技术学院",
-    major: "计算机科学与技术",
-    supervisor: "李四",
-    submit-date: datetime.today(),
-  ) + info
+    (
+      title: "毕业论文中文题目",
+      title-en: "Thesis Title in English",
+      student-id: "123456",
+      author: "张三",
+      department: "信息科学与技术学院",
+      major: "计算机科学与技术",
+      supervisor: "李四",
+      submit-date: datetime.today(),
+    ) + info
+  )
 
   if type(info.submit-date) == datetime {
     info.submit-date = datetime-display-cn-cover(info.submit-date)
@@ -86,10 +86,10 @@
       columns: (1fr, 1fr),
       column-gutter: 9em,
       text(size: font-size.小四, font: fonts.宋体)[
-        #fakebold[学校代码：10200]
+        *学校代码：10200*
       ],
       text(size: font-size.小四, font: fonts.宋体)[
-        #fakebold[学号：#info.student-id]
+        *学号：#info.student-id*
       ],
     )
   ]
@@ -101,7 +101,7 @@
   //! 校徽 & 校名 & 类型
   let nenu-logo = read("../assets/nenu-logo.svg")
   nenu-logo = colorize(nenu-logo, blue.darken(30%))
-  image.decode(nenu-logo, width: 90pt)
+  image(nenu-logo, width: 90pt, format: "svg")
 
   pad(image("../assets/nenu-title.svg", width: 126pt), top: 0cm, bottom: -0.8cm)
 
@@ -113,13 +113,13 @@
   //! 标题
   // TODO 长标题填充
   text(size: font-size.二号, font: fonts.隶书)[
-    #fakebold[#info.title]
+    *#info.title*
   ]
 
   v(3pt)
 
   text(size: font-size.三号, font: fonts.宋体)[
-    #fakebold[#info.title-en]
+    *#info.title-en*
   ]
 
   v(40pt)
@@ -133,8 +133,13 @@
         columns: (info-key-width, info-key-width, 1fr),
         column-gutter: info-col-gutter,
         row-gutter: info-row-gutter,
-        info-key("学生姓名："), info-long-value("author", info.author), info-key("指导教师："),
-        info-long-value("major", info.major), info-key("所在学院："), info-long-value("department", info.department),
+        // 学生姓名
+        info-key("学生姓名："), info-long-value("author", info.author),
+        // 指导教师
+        info-key("指导教师："), info-long-value("major", info.supervisor),
+        // 所在学院
+        info-key("所在学院："), info-long-value("department", info.department),
+        // 所在专业
         info-key("所在专业："), info-long-value("major", info.major),
       ),
     ),
@@ -151,6 +156,4 @@
       #info.submit-date
     ]
   )
-
-
 }

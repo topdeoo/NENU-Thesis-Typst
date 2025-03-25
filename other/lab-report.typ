@@ -108,8 +108,7 @@
       student-id: "123456",
       grade: "2024",
       submit-date: datetime.today(),
-    )
-      + info
+    ) + info
   )
 
 
@@ -168,9 +167,18 @@
 
   pad(image("../assets/nenu-title.svg", width: 6.14cm), top: 0cm, bottom: 0cm)
 
-  text(font: fonts.黑体, size: font-size.小二, "信  息  科  学  与  技  术  学  院\n\n")
+  text(
+    font: fonts.黑体,
+    size: font-size.小二,
+    "信  息  科  学  与  技  术  学  院\n\n",
+  )
 
-  text(font: fonts.黑体, size: font-size.小初, weight: "medium", "实    验    报    告\n")
+  text(
+    font: fonts.黑体,
+    size: font-size.小初,
+    weight: "medium",
+    "实    验    报    告\n",
+  )
   text(font: fonts.宋体, size: font-size.四号, weight: "medium")[
 
     （ #info.year 年 #info.season 季 学期 ）
@@ -186,9 +194,18 @@
         columns: (info-key-width, info-key-width, 1fr),
         column-gutter: info-col-gutter,
         row-gutter: info-row-gutter,
-        info-key("课程名称："), info-long-value("lession", info.lesson), info-key("指导教师："),
-        info-long-value("major", info.teacher), info-key("学生姓名："), info-long-value("author", info.author),
-        info-key("学   号："), info-long-value("student-id", info.student-id), info-key("年   级："),
+        info-key("课程名称："),
+        info-long-value("lession", info.lesson),
+        info-key("指导教师："),
+
+        info-long-value("major", info.teacher),
+        info-key("学生姓名："),
+        info-long-value("author", info.author),
+
+        info-key("学   号："),
+        info-long-value("student-id", info.student-id),
+        info-key("年   级："),
+
         info-long-value("grade", info.grade),
       ),
     ),
@@ -216,8 +233,7 @@
       lab-dev: "Intel 13th i5",
       lab-requirement: "实验要求实验要求",
       lab-result: "实验结果与结论，简要概括",
-    )
-      + lab-info
+    ) + lab-info
   )
 
   pagebreak(weak: true)
@@ -229,7 +245,10 @@
 
   let heading-font = (fonts.宋体,)
   let heading-size = (font-size.四号, font-size.五号)
-  let heading-padding = (top: 2 * 15.6pt - .7em, bottom: (2 * 15.6pt - .7em, 1.5 * 15.6pt - .7em))
+  let heading-padding = (
+    top: 2 * 15.6pt - .7em,
+    bottom: (2 * 15.6pt - .7em, 1.5 * 15.6pt - .7em),
+  )
 
 
   show heading: i-figured.reset-counters
@@ -246,9 +265,9 @@
     .pairs()
     .filter(pair => pair.at(0).starts-with("heading-"))
     .map(pair => (
-      pair.at(0).slice("heading-".len()),
-      pair.at(1),
-    ))
+    pair.at(0).slice("heading-".len()),
+    pair.at(1),
+  ))
 
 
   let array-at(arr, pos) = {
@@ -272,7 +291,12 @@
       font: array-at(heading-font, it.level),
       size: array-at(heading-size, it.level),
       weight: "bold",
-      ..unpack(heading-text-args-lists.map(pair => (pair.at(0), array-at(pair.at(1), it.level)))),
+      ..unpack(
+        heading-text-args-lists.map(pair => (
+          pair.at(0),
+          array-at(pair.at(1), it.level),
+        )),
+      ),
     )
     set block(
       above: heading-padding.top,
